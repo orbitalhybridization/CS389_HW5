@@ -1,8 +1,8 @@
 // A testfile
 
 #include "cache.hh"
-#include "fifo_evictor.hh"
 #include <cassert>
+#include "fifo_evictor.hh"
 #include <iostream>
 #include <cstring>
 

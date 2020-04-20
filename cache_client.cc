@@ -155,7 +155,6 @@ public:
 
 			catch (boost::wrapexcept<boost::property_tree::json_parser::json_parser_error>){
 				false_misses++;
-				std::cout<<false_misses<<std::endl;
 				char* H = "H"; //the only key that is not in valid char
 				return H;
 			}
