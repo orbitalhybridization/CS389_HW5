@@ -1,4 +1,4 @@
-# HW5: Lies, statistics, and benchmarks
+# HW5: Lies, statistics, and benchmarks!
 Arthur Lawson, Ian Jackson
 
 ## Part 1:
