@@ -3,8 +3,7 @@ Arthur Lawson, Ian Jackson
 
 ## Part 1:
 
-Adhering to guidelines of 50% of ETC keys appearing only 1% of requests
-& 90% of keys are 10% of requests
+Adhering to the ratios observed in the Memcached workload paper, our implementation created "common keys", which populated 50% of the total key pool and were accessed with a probability of 99% and "rare keys," which took up the other 50% of the total key pool and were accessed with a probability of 1%.
 
 ### Warm Cache Implementation
 We originally called warm_cache inside of generate, but moved it into baselines.cc to make sure that it was only called once and didn't delay the overall time of testing.
