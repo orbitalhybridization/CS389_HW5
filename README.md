@@ -22,6 +22,8 @@ The array of latencies for each request was ofstreamed into a file, "times.dat,"
 
 ![Plot](latency_plot.png)
 
+The latencies here are generally uniform across request number and requets type, with a few outliers.
+
 ## Bugs, Leaks, and Warnings
 Sometimes, if maxmem is too big a number, running the server leads to an error. This could be due to the fact that Cache::size_type is a u_int32 and cannot take numbers over 4294967294.
 
