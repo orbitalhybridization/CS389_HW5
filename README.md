@@ -16,13 +16,13 @@ We started each workload with a ready-warm cache, which was filled with # keys =
 
 ## Part 2:
 
-We tested the baselines by inputting the parameters that gave us 84% hit rate in Part 1 (926000 bytes cache memory, 5000 requests), and found a 95% percentile latency of 1.94ms and a rate of 914 requests/second.
+We tested the baselines by inputting the parameters that gave us 84% hit rate in Part 1 (926000 bytes cache memory, 5000 requests), and found a 95% percentile of 1.94ms and a rate of 914 requests/second.
 
 The array of latencies for each request was ofstreamed into a file, "times.dat," and gnuplotted as a scatter plot, the output of which was saved as latency_plot.png (below).
 
 ![Plot](latency_plot.png)
 
-The latencies here are generally uniform across request number and request type, with a few outliers. The 95% percentile of 1.94 argues further that a significant percentage of the distribution has latencies faster than the visible outliers.
+The latencies here are generally uniform across request number and requets type, with a few outliers. The 95% percentile of 1.94 argues further that a significant percentage of the distribution has latencies faster than the visible outliers.
 
 ## Part 3:
 
@@ -36,21 +36,17 @@ These are the things that we altered in order to analyze the effects they have o
 These changes have been recorded in the table below.
 
 | Thing We Changed                     | Duration (seconds) | req/per (seconds) |95th percentile ltncy(ms)|
-+--------------------------------------+--------------------+-------------------+-------------------------+
+-----------------------------------------------------------------------------------------------------------
 | None (Control)                       | 6.69224            | 922               | 2.016                   |
-+--------------------------------------+--------------------+-------------------+-------------------------+
-| max_load_factor                      | 6.71539            | 922               | 2.052                   |
-| from0.75 ->0.5                       |                    |                   |                         |
-+--------------------------------------+--------------------+-------------------+-------------------------+
-| machine from (virtual machine linux) | 8.50602            | 925               | 1.863                   |
-| -> native linux (ubuntu 18.04)       |                    |                   |                         |
-+--------------------------------------+--------------------+-------------------+-------------------------+
-| maxmem                               | 6.65294            | 923               | 1.966                   |
-| from 926000 -> 92600000 (x100)       |                    |                   |                         |
-+--------------------------------------+--------------------+-------------------+-------------------------+
-| Compiler Optimization flag           | 3.05632            | 913               | 0.68                    |
-| from -00 -> -03                      |                    |                   |                         |
-+--------------------------------------+--------------------+-------------------+-------------------------+
+-----------------------------------------------------------------------------------------------------------
+| max_load_factor (from0.75 ->0.5)     | 6.71539            | 922               | 2.052                   |
+-----------------------------------------------------------------------------------------------------------
+| machine from (virtual machine linux)-> native linux (ubuntu 18.04) | 8.50602            | 925               | 1.863                   |
+-----------------------------------------------------------------------------------------------------------
+| maxmem from 926000 -> 92600000 (x100)                               | 6.65294            | 923               | 1.966                   |
+-----------------------------------------------------------------------------------------------------------
+| Compiler Optimization flag from -00 -> -03           | 3.05632            | 913               | 0.68                    |
+-----------------------------------------------------------------------------------------------------------
 
 Control:
 
