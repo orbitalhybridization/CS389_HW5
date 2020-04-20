@@ -1,4 +1,4 @@
-# HW5: Lies, statistics, and benchmarks!
+# HW5: Lies, statistics, and benchmarks
 Arthur Lawson, Ian Jackson
 
 ## Part 1:
@@ -57,7 +57,7 @@ Compiler:
 The new optimization created performance benefits in both duration and a much lower mean latency. This requires the least analysis because we are all aware of the magic the compiler can do when we give it the space to shine! The thing of note is that req/per did not change much.
 
 ## Bugs, Leaks, and Warnings
-Sometimes, if maxmem is too big a number, running the server leads to an error. This could be due to the fact that Cache::size_type is a u_int32 and cannot take numbers over 4294967294. As we progressed, we fixed this so we could go up to the unint32 limit and discovered some issues with a smaller cache size as mentioned above (part 3->maxmem
+Sometimes, if maxmem is too big a number, running the server leads to an error. This could be due to the fact that Cache::size_type is a u_int32 and cannot take numbers over 4294967294. As we progressed, we fixed this so we could go up to the unint32 limit and discovered some issues with a smaller cache size as mentioned above (part 3->maxmem)
 
 ## Contributions / Sources
 Design adopted from assigned Memcache Readings (Nishtala et al. 2013, Atikoglu et al., 2012).
