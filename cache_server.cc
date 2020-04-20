@@ -3,6 +3,7 @@
 // https://www.boost.org/doc/libs/develop/libs/beast/example/http/server/async/http_server_async.cpp
 
 #include "cache.hh"
+#include "fifo_evictor.hh"
 #include <iostream>
 #include <string>
 #include <cassert>
@@ -110,7 +111,7 @@ handle_request(
 
 	// Add requested key/value pair to cache
 	Cache::size_type sz = temp.length();
-        cache_->set(key,value,sz); //create or replace k,v pair in cache
+    cache_->set(key,value,sz); //create or replace k,v pair in cache
 	//assert(*cache_->get(key,sz) == *value); //check that this worked properly
 
 	// Build response and send!
@@ -137,6 +138,7 @@ handle_request(
 		pt::ptree root;
 		root.put("key",key);
 		root.put("value",value);
+
 		// read json into string stream for body
 		std::ostringstream buf; 
 		write_json(buf, root, false);
@@ -484,11 +486,11 @@ int main(int argc, const char* argv[]){
 	// Set up args options for help menu
 	parse_cmd::options_description options("Input Options");
 	options.add_options()
-		("help", "show usage options")
-		("m", parse_cmd::value(&maxmem), "maximum memory for Cache object (default = 100)")
-		("s", parse_cmd::value(&address),"address of server (default = 127.0.0.1)")
-		("p", parse_cmd::value(&port),"which TCP port to connect to (default = 6969)")
-		("t threads", parse_cmd::value(&threads), "how many threads to use (default = 1)")
+		("help,h", "show usage options")
+		("maxmem,m", parse_cmd::value(&maxmem), "maximum memory for Cache object (default = 100)")
+		("server,s", parse_cmd::value(&address),"address of server (default = 127.0.0.1)")
+		("port,p", parse_cmd::value(&port),"which TCP port to connect to (default = 6969)")
+		("threads,t", parse_cmd::value(&threads), "how many threads to use (default = 1)")
 	;
 
 
@@ -502,9 +504,28 @@ int main(int argc, const char* argv[]){
 		std::cout << options << std::endl;
 		return 0;
 	}
+    std::cout<<maxmem<< "<- maxmem"<<std::endl;
+
+    if (vm.count("m")) {
+        std::cout << "Maxmem set to " << " 222 HUrt" << std::endl;
+    }
+
+    if (vm.count("s")) {
+        std::cout << "Server set to " << address << std::endl;
+    }
+
+
+    if (vm.count("p")) {
+        std::cout << "Port set to " << port << std::endl;
+    }
+
+    if (vm.count("t")) {
+        std::cout << "Threads set to " << threads << std::endl;
+    }
 
 	// Set up cache
-	std::shared_ptr<Cache> cache(new Cache(maxmem));
+    FIFO* evictor = new FIFO();
+	std::shared_ptr<Cache> cache(new Cache(maxmem, 0.75, evictor));
 	
 	//// SET UP SERVER
         beast::error_code ec; // error code for parsing ip
@@ -525,6 +546,8 @@ int main(int argc, const char* argv[]){
     
 	// Run the I/O service on one thread
 	ioc.run();
+
+    delete evictor; //d
 
 	return 1;
 }

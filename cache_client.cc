@@ -95,12 +95,11 @@ public:
 		http::response<http::dynamic_body> res;
 
 		// Receive the HTTP response
-		std::cout << "Die here?" << std::endl;
-		http::read(*stream_, buffer, res);
+  		http::read(*stream_, buffer, res);
 
 		// Write the message to standard out, this should be the value of key
 		// and the size of the value.
-		std::cout << res << std::endl;
+		//std::cout << res << std::endl;
 
 		return;
 
@@ -129,11 +128,11 @@ public:
 		http::response<http::string_body> res;
 
 		// Receive the HTTP response
-		http::read(*stream_, buffer, res);
+ 		http::read(*stream_, buffer, res);
 
 		// Write the message to standard out, this should be the value of key
 		// and the size of the value
-		std::cout << res << std::endl;
+		//std::cout << res << std::endl;
 		
 		// if key found, return
 		Cache::val_type value;
@@ -156,7 +155,9 @@ public:
 
 			catch (boost::wrapexcept<boost::property_tree::json_parser::json_parser_error>){
 				false_misses++;
-				return nullptr;
+				std::cout<<false_misses<<std::endl;
+				char* H = "H"; //the only key that is not in valid char
+				return H;
 			}
 		}
 	
@@ -190,7 +191,7 @@ public:
 		http::read(*stream_, buffer, res);
 
 		// Write the message to standard out
-		std::cout << res << std::endl;
+		//std::cout << res << std::endl;
 		
 		// if the server found the key, then return true
 		if (res.result() == http::status::ok){return true;}
@@ -222,7 +223,7 @@ public:
 		http::read(*stream_, buffer, res);
 
 		// Write the message to standard out
-		std::cout << res << std::endl;
+		//std::cout << res << std::endl;
 
 		// Parse Space_used field of header and return!
 		auto res_string = res.base().at("Space-Used");
@@ -258,13 +259,10 @@ public:
 
 		// Write the message to standard out, this should be the value of key
 		// and the size of the value
-		std::cout << res << std::endl;
+		//std::cout << res << std::endl;
 
      }
 
-double get_false_misses(){
-	return false_misses;
-}
 
  private:     
     std::unordered_map<key_type, std::pair<val_type,size_type>,hash_func> storage; //stores value pointer and size of value
@@ -306,8 +304,4 @@ Cache::size_type Cache::space_used() const
 void Cache::reset()
 {
     pImpl_->reset();
-}
-
-double Cache::get_false_misses(){
-	return pImpl_->get_false_misses();
 }

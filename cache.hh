@@ -22,8 +22,6 @@ class Cache {
   using val_type = const byte_type*;   // Values for K-V pairs
   using size_type = uint32_t;         // Internal indexing to K-V elements
 
-  double false_misses;
-
   // A function that takes a key and returns an index to the internal data
   using hash_func = std::function<std::size_t(key_type)>;
 
@@ -74,8 +72,5 @@ class Cache {
 
   // Delete all data from the cache
   void reset();
-
-  double get_false_misses();
-
 };
 
