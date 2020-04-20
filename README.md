@@ -35,7 +35,6 @@ These are the things that we altered in order to analyze the effects they have o
 
 These changes have been recorded in the table below.
 
-+--------------------------------------+--------------------+-------------------+-------------------------+
 | Thing We Changed                     | Duration (seconds) | req/per (seconds) |95th percentile ltncy(ms)|
 +--------------------------------------+--------------------+-------------------+-------------------------+
 | None (Control)                       | 6.69224            | 922               | 2.016                   |
