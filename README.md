@@ -23,7 +23,7 @@ The array of latencies for each request was ofstreamed into a file, "times.dat,"
 ![Plot](latency_plot.png)
 
 ## Bugs, Leaks, and Warnings
-Sometimes a number too big put into maxmem causes an error. This could be due to the fact that Cache::size_type is a u_int32 and cannot take numbers over 4294967294.
+Sometimes, if maxmem is too big a number, running the server leads to an error. This could be due to the fact that Cache::size_type is a u_int32 and cannot take numbers over 4294967294.
 
 ## Contributions / Sources
 Design adopted from assigned Memcache Readings (Nishtala et al. 2013, Atikoglu et al., 2012).
