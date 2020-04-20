@@ -11,6 +11,8 @@ std::vector<double> baseline_latencies(int nreq){
 	Cache* cache = new Cache("127.0.0.1","6969");
     warm_cache(nreq, cache);
     std::vector<double> output_vec;
+    //time for part 3
+    auto t1 = std::chrono::high_resolution_clock::now();
     for (int j = 0; j<nreq; j++){
 
     //get random request
@@ -18,6 +20,11 @@ std::vector<double> baseline_latencies(int nreq){
     output_vec.push_back(work);
     
     }
+    auto t2 = std::chrono::high_resolution_clock::now();
+    double duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
+    duration*=pow(10,-6); //converts to seconds
+    std::cout<<duration<<"<- duration"<<std::endl;
+
     delete cache;
     return output_vec;
 }

@@ -125,7 +125,7 @@ double work_set(Cache* cache){
     cache->set(key,value,sz); //when we record time of each, we can take time around this function and return that instead of void :)
     auto t2 = std::chrono::high_resolution_clock::now();
     double duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
-    duration*=pow(10,-3);
+    duration*=pow(10,3);
     return duration;
 }
     
@@ -136,7 +136,8 @@ double work_get(Cache* cache){
     key_type key = give_up_get();
     Cache::size_type sz = 0;
     auto t1 = std::chrono::high_resolution_clock::now();
-    cache->get(key, sz);    auto t2 = std::chrono::high_resolution_clock::now();
+    cache->get(key, sz);    
+    auto t2 = std::chrono::high_resolution_clock::now();
     double duration = std::chrono::duration_cast<std::chrono::microseconds>( t2 - t1 ).count();
     duration*=pow(10,-3);
     Cache::val_type val = cache->get(key, sz);
