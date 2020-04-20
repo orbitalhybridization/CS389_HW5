@@ -16,13 +16,13 @@ We started each workload with a ready-warm cache, which was filled with # keys =
 
 ## Part 2:
 
-We tested the baselines by inputting the parameters that gave us 84% hit rate in Part 1 (926000 bytes cache memory, 5000 requests), and found a 95% percentile of 1.94ms and a rate of 914 requests/second.
+We tested the baselines by inputting the parameters that gave us 84% hit rate in Part 1 (926000 bytes cache memory, 5000 requests), and found a 95% percentile latency of 1.94ms and a rate of 914 requests/second.
 
 The array of latencies for each request was ofstreamed into a file, "times.dat," and gnuplotted as a scatter plot, the output of which was saved as latency_plot.png (below).
 
 ![Plot](latency_plot.png)
 
-The latencies here are generally uniform across request number and requets type, with a few outliers. The 95% percentile of 1.94 argues further that a significant percentage of the distribution has latencies faster than the visible outliers.
+The latencies here are generally uniform across request number and request type, with a few outliers. The 95% percentile of 1.94 argues further that a significant percentage of the distribution has latencies faster than the visible outliers.
 
 ## Part 3:
 
